@@ -18,6 +18,7 @@
    "LPOP"    {:mutates true :run kwik-lpop}
    "MSET"    {:mutates true :run kwik-mset}
    "MGET"    {:mutates false :run kwik-mget}
+   "KEYS"    {:mutates false :run kwik-search-keys}
    })
 
 (defn- find-server-command [name]
