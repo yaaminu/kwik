@@ -3,6 +3,7 @@
             [kwik.commands.strings :refer :all]
             [kwik.commands.generic :refer :all]
             [kwik.commands.lists :refer :all]
+            [kwik.commands.maps :refer :all]
             [clojure.string :refer [upper-case]]))
 
 (def __kwik-database (atom {}))
@@ -15,6 +16,8 @@
    "LSET"    {:mutates true :run kwik-lset}
    "LAPPEND" {:mutates true :run kwik-lappend}
    "LPOP"    {:mutates true :run kwik-lpop}
+   "MSET"    {:mutates true :run kwik-mset}
+   "MGET"    {:mutates false :run kwik-mget}
    })
 
 (defn- find-server-command [name]
