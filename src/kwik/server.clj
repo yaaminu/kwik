@@ -18,6 +18,7 @@
    "LPOP"    {:mutates true :run kwik-lpop}
    "MSET"    {:mutates true :run kwik-mset}
    "MGET"    {:mutates false :run kwik-mget}
+   "MDEL"    {:mutates false :run kwik-mdel}
    "KEYS"    {:mutates false :run kwik-search-keys}
    })
 

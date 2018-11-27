@@ -12,7 +12,7 @@
         [nil ERR_MAPPING_NOT_FOUND]
         (let [{type :type value :value} kwik-db-entry]
           (if (= type "map")
-            [(get value map-key) nil]
+            [(get value map-key "") nil]
             [nil ERR_TYPE_MISMATCH]))
         )))
   )
@@ -35,4 +35,20 @@
           (= type "map") (_do-update-map kwik-database key existing-map map-key map-val)
           :else [nil ERR_TYPE_MISMATCH]))
       ))
+  )
+
+
+(defn kwik-mdel [kwik-database key argV]
+  (if (not= 1 (count argV))
+    [nil ERR_WRONG_ARITY]
+    (let [[map-key] argV
+          {kwik-db-entry key} @kwik-database
+          {type :type value :value} kwik-db-entry]
+      (cond
+        (nil? kwik-db-entry) ["OK" nil]
+        (not= type "map") [nil ERR_TYPE_MISMATCH]
+        :else (do
+                (swap! kwik-database assoc key (struct-map kwik-value :type "map" :value (dissoc value map-key)))
+                ["OK" nil])
+        )))
   )
