@@ -8,10 +8,7 @@
 
 (defn- _do-pop [kwik-database key target-list]
   (cond
-    (= 0 (count target-list)) [nil, ERR_LIST_EMPTY]         ;impossible but just in case
-    (= 1 (count target-list)) (do
-                                (kwik-delete kwik-database key nil)
-                                [(peek target-list) nil])
+    (= 0 (count target-list)) [nil, ERR_LIST_EMPTY]
     :else (do
             (swap! kwik-database assoc key (struct-map kwik-value :type "list" :value (pop target-list)))
             [(peek target-list) nil])
