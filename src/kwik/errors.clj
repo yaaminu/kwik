@@ -4,5 +4,6 @@
 (def ERR_TYPE_MISMATCH {"code" 101 "message" "Command specified against wrong type"})
 (def ERR_WRONG_ARITY {"code" 102 "message" "Incorrect number of arguments specified"})
 (def ERR_COMMAND_NOT_FOUND {"code" 103 "message" "Command not found"})
+(def ERR_LIST_EMPTY {"code" 104 "message" "Attempt to pop value off an empty list"})
 
 

@@ -18,12 +18,11 @@
 
 
 (defn kwik-set [kwik-database key argV]
+  ;argV is a vector but it's should contain exactly on entry
   (let [[value] argV]
     (if (nil? value)
       [nil ERR_WRONG_ARITY]
       (do
-        (swap! kwik-database assoc key (struct-map kwik-value
-                                         :type "string"
-                                         :value value))
+        (swap! kwik-database assoc key (struct-map kwik-value :type "string" :value (str value)))
         ["OK" nil])
       )))

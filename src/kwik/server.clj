@@ -1,13 +1,21 @@
 (ns kwik.server
   (:require [kwik.errors :refer :all]
             [kwik.commands.strings :refer :all]
+            [kwik.commands.generic :refer :all]
+            [kwik.commands.lists :refer :all]
             [clojure.string :refer [upper-case]]))
 
-(def kwik-database (atom {}))
+(def __kwik-database (atom {}))
 
 (def command-table
-  {"GET" {:mutates false :run kwik-get}
-   "SET" {:mutates true :run kwik-set}})
+  {"GET"     {:mutates false :run kwik-get}
+   "SET"     {:mutates true :run kwik-set}
+   "DEL"     {:mutates true :run kwik-delete}
+   "LGET"    {:mutates false :run kwik-lget}
+   "LSET"    {:mutates true :run kwik-lset}
+   "LAPPEND" {:mutates true :run kwik-lappend}
+   "LPOP"    {:mutates true :run kwik-lpop}
+   })
 
 (defn- find-server-command [name]
   (if (contains? command-table name)
@@ -22,6 +30,6 @@
     (if (nil? server-command)
       [nil err]
       (do
-        ((get server-command :run) kwik-database target-key args)))
+        ((get server-command :run) __kwik-database target-key args)))
     ))
 
