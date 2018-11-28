@@ -11,7 +11,7 @@
            (GET "/:command/:key" []
              (fn [req] (-> req handle-request run-command render-response)))
 
-           (not-found "Not found"))
+           (not-found (str {"message" "Bad request"})))
 (defn -main
   [&]
   (run-server (wrap-defaults all-routes site-defaults) {:port 8000 :thread 1}))

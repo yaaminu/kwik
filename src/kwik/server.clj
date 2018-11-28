@@ -36,29 +36,43 @@
    "KEYS"    {:mutates false :run kwik-search-keys :arity 1}
    })
 
+
+
 (defn- find-server-command [name]
   (get command-table (upper-case name) nil))
 
+
+
 (defn- check-arity [command client-arg-count]
+
   (let [{arity :arity} command]
+
     ; convert negative arity to positive and check if client command is >= arity
     ; see the description of arity above
-    (< arity 0) (>= client-arg-count (* -1 arity))
-    :else (= arity client-arg-count)
-    ))
+    (cond
+      (< arity 0) (>= client-arg-count (* -1 arity))
+      :else (= arity client-arg-count)
+      )))
+
 
 (defn run-command [client-command]
+
   ; given a particular command retrieve it from the command table in a case
   ; insensitive manner and pass it the client supplied arguments.
   ; this routine returns a tuple with first value indicating the results and
   ; the last one indicating err. At any point in time, only one is not nil
+
   (let [{command-name :name target-key :key args :args} client-command
         server-command (find-server-command command-name)]
+
     (if (nil? server-command)
+
       [nil ERR_COMMAND_NOT_FOUND]
       ; +1 for the first argument. See docs above
       (let [arity-ok (check-arity server-command (+ (count args) 1))]
+
         (if (true? arity-ok)
+
           ((get server-command :run) __kwik-database target-key args)
           [nil ERR_WRONG_ARITY]
           ))

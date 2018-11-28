@@ -16,5 +16,5 @@
 (defn render-response [kwik-command-response]
   (let [[res err] kwik-command-response]
     (if (nil? err)
-      {:status 200 :body (str res "\r\n")}
-      {:status 400 :body (str err "\r\n")})))
+      {:status 200 :body (str res)}
+      {:status 400 :body (str err)})))
