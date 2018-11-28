@@ -3,7 +3,7 @@
 
 (defn handle-request [req]
   ; Handles requests from clients and parses the parameters
-  ; from the request into a command and returns it.
+  ; from the request into a commands and returns it.
   ; Most commands
   (let [command (-> req :params :command)
         key (-> req :params :key)

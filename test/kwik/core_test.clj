@@ -8,11 +8,11 @@
 (def host "http://localhost:8000")
 
 (deftest general-tests
-  (testing "command not found"
-    (let [{status :status reply :body} (http/get (str host "/unknown-command/key?args") options)
+  (testing "commands not found"
+    (let [{status :status reply :body} (http/get (str host "/unknown-commands/key?args") options)
           error-code (get reply "code")]
       (is (= 400 status) "Status code for failed requests should be 400")
-      (is (= 103 error-code) "Must reply with a 103 error code when a command does not exist")
+      (is (= 103 error-code) "Must reply with a 103 error code when a commands does not exist")
       ))
 
   (testing "Inavlid url"

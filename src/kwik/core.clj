@@ -8,7 +8,7 @@
   (:gen-class))
 
 (defroutes all-routes
-           (GET "/:command/:key" []
+           (GET "/:commands/:key" []
              (fn [req] (-> req handle-request run-command render-response)))
 
            (not-found (str {"message" "Bad request"})))

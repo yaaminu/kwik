@@ -11,15 +11,15 @@
 
 (def command-table
   ; represents a map of the commands supported by kwik
-  ; Each command has:
+  ; Each commands has:
   ;
-  ; mutates: specifies whether or not the command changes the database
+  ; mutates: specifies whether or not the commands changes the database
   ;
   ; run: (fn [kwik-database:map arg1:string args:vector] ;body )-> [results err]
   ;      The function returns a tuple in the form of [results err]. At any point in
   ;      time, only one is not nil.
   ;
-  ; arity: No of arguments the command expects including the key i.e (count args) + 1
+  ; arity: No of arguments the commands expects including the key i.e (count args) + 1
   ;      negative means 'at least'. Currently arity is not checked and it's only for
   ;      for documentation purposes.
   ;
@@ -47,7 +47,7 @@
 
   (let [{arity :arity} command]
 
-    ; convert negative arity to positive and check if client command is >= arity
+    ; convert negative arity to positive and check if client commands is >= arity
     ; see the description of arity above
     (cond
       (< arity 0) (>= client-arg-count (* -1 arity))
@@ -57,7 +57,7 @@
 
 (defn run-command [client-command]
 
-  ; given a particular command retrieve it from the command table in a case
+  ; given a particular commands retrieve it from the commands table in a case
   ; insensitive manner and pass it the client supplied arguments.
   ; this routine returns a tuple with first value indicating the results and
   ; the last one indicating err. At any point in time, only one is not nil
