@@ -1,6 +1,7 @@
 (ns kwik.commands.generic
   (:require [kwik.types :refer [kwik-value]]
-            [kwik.errors :refer [ERR_WRONG_ARITY]]))
+            [kwik.errors :refer [ERR_INVALID_PATTERN]])
+  (:import (java.util.regex PatternSyntaxException)))
 
 
 
@@ -13,6 +14,9 @@
 
 (defn kwik-search-keys [kwik-database key-pattern _]
   (let [keys (vec (keys @kwik-database))
-        pattern (re-pattern key-pattern)]
-    [(vec (filter (fn [key] (re-matches pattern key)) keys)) nil]
-    ))
+        pattern (try (re-pattern key-pattern) (catch PatternSyntaxException _ nil))]
+    (if (nil? pattern)
+      [nil ERR_INVALID_PATTERN]
+      [(vec (filter (fn [key] (re-matches pattern key)) keys)) nil]
+      ))
+  )

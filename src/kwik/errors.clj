@@ -5,5 +5,7 @@
 (def ERR_WRONG_ARITY {"code" 102 "message" "Incorrect number of arguments specified"})
 (def ERR_COMMAND_NOT_FOUND {"code" 103 "message" "Command not found"})
 (def ERR_LIST_EMPTY {"code" 104 "message" "Attempt to pop value off an empty list"})
+(def ERR_INVALID_PATTERN {"code" 105 "message" "Invalid pattern"} )
+(def ERR_UNKNOWN {"code" 300 "message" "An unknown error occurred"})
 
 
