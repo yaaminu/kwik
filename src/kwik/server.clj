@@ -8,6 +8,8 @@
 
 (def __kwik-database (atom {}))
 
+(defn- echo [_ arg1 _]
+  [(str arg1), nil])
 
 (def command-table
   ; represents a map of the commands supported by kwik
@@ -23,7 +25,8 @@
   ;      negative means 'at least'. Currently arity is not checked and it's only for
   ;      for documentation purposes.
   ;
-  {"GET"     {:mutates false :run kwik-get :arity 1}
+  {"ECHO"    {:mutates false :run echo :arity 1}
+   "GET"     {:mutates false :run kwik-get :arity 1}
    "SET"     {:mutates true :run kwik-set :arity 2}
    "DEL"     {:mutates true :run kwik-delete :arity 1}
    "LGET"    {:mutates false :run kwik-lget :arity 1}
