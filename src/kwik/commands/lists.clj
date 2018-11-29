@@ -14,7 +14,9 @@
             [(peek target-list) nil])
     ))
 
+;LGET
 (defn kwik-lget [kwik-database key _]
+  ; Returns all values stored at {key} in {kwik-database}
   (let [{kwik-db-entry key} @kwik-database]
     (if (nil? kwik-db-entry)
       [nil ERR_MAPPING_NOT_FOUND]
@@ -26,8 +28,9 @@
       )))
 
 
-
+;LSET
 (defn kwik-lset [kwik-database key argV]
+  ;Stores the vector {argV} into {key} in {kwik-database}
   ;argV is a vector that contains the new entries
   (if (= 0 (count argV))
     [nil ERR_WRONG_ARITY]
@@ -37,7 +40,10 @@
     ))
 
 
+;LAPPEND
 (defn kwik-lappend [kwik-database key argV]
+  ; Appends the vector {argV} to the values already stored at {key}
+  ; in {kwik-database}. If there's no existing mapping, a new one is created.
   (if (= 0 (count argV))
     [nil ERR_WRONG_ARITY]
     (let [{kwik-db-entry key} @kwik-database
@@ -48,7 +54,11 @@
         :else [nil ERR_TYPE_MISMATCH]
         ))))
 
+;LPOP
 (defn kwik-lpop [kwik-database key _]
+  ; Removes and returns the last entry of the list stored at {key}
+  ; in {kwik-database}. When there's no mapping, returns ERR_LIST_EMPTY error.
+  ; Even if the last entry is popped, the mapping will not be removed
   (let [{kwik-db-entry key} @kwik-database
         {type :type list :value} kwik-db-entry]
     (cond

@@ -71,9 +71,12 @@ Valid error codes are:
   - example: `curl http://localhost:8000/v1/lpop/key` 
 
 ## Maps
-1. MSET [KEY map-key map-value]
-   - Stores map-value into a map at map-key stored at KEY
-   - example: `curl http://localhost:8000/v1/mset/KEY?args=map-key,map-value`
+1. MSET [KEY "key1 value1" "key2 value2" ...]
+   - Takes a list of space separated values, transform each value to key-val pairs
+     and puts them into a map at KEY. It's important to ensure that each value is space
+     separated or you'll get ERR_MALFORMED_ARGUMENTS error.
+   - example: `curl http://localhost:8000/v1/mset/KEY?args=key1%20value1key2%20value2`
+
 2. MGET [KEY map-key]
   - Returns the map entry stored at map-key of a map which is stored at KEY
   - example: `curl http://localhost:8000/v1/mget/KEY?args=map-key`

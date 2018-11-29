@@ -3,26 +3,25 @@
             [kwik.types :refer [kwik-value]]))
 
 
-
+;GET
 (defn kwik-get [kwik-database key _]
-  (let [{kwik-db-entry key} @kwik-database]
+  ;Retrieves the string value stored at {key} from {kwik-database}
+  (let [{kwik-db-entry key} @kwik-database
+        {type :type value :value} kwik-db-entry]
     (if (nil? kwik-db-entry)
       [nil ERR_MAPPING_NOT_FOUND]
-      (do
-        (let [{type :type value :value} kwik-db-entry]
-          (if (= type "string")
-            [value nil]
-            [nil ERR_TYPE_MISMATCH])))
-      )))
+      (if (= type "string")
+        [value nil]
+        [nil ERR_TYPE_MISMATCH])))
+  )
 
 
 
 (defn kwik-set [kwik-database key argV]
+  ;Adds a new mapping at {key} in {kwik-databas}
   ;argV is a vector but it's should contain exactly one entry
-  (if (not= 1 (count argV))
-    [nil ERR_WRONG_ARITY]
-    (let [[value] argV]
-      (do
-        (swap! kwik-database assoc key (struct-map kwik-value :type "string" :value (str value)))
-        ["OK" nil])
-      )))
+  (let [[value] argV]
+    (do
+      (swap! kwik-database assoc key (struct-map kwik-value :type "string" :value (str value)))
+      ["OK" nil])
+    ))

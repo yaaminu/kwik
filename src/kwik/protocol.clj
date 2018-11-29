@@ -14,6 +14,7 @@
 
 
 (defn render-response [kwik-command-response]
+  ;renders the response according to the kwik protocol
   (let [[res err] kwik-command-response]
     (if (nil? err)
       {:status 200 :body (str res)}

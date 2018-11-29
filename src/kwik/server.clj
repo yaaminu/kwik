@@ -17,7 +17,7 @@
   ;
   ; run: (fn [kwik-database:map arg1:string args:vector] ;body )-> [results err]
   ;      The function returns a tuple in the form of [results err]. At any point in
-  ;      time, only one is not nil.
+  ;      time, only one is not nil. the second value in the tuple indicates an error
   ;
   ; arity: No of arguments the commands expects including the key i.e (count args) + 1
   ;      negative means 'at least'. Currently arity is not checked and it's only for
@@ -30,7 +30,7 @@
    "LSET"    {:mutates true :run kwik-lset :arity -2}
    "LAPPEND" {:mutates true :run kwik-lappend :arity -2}
    "LPOP"    {:mutates true :run kwik-lpop :arity 1}
-   "MSET"    {:mutates true :run kwik-mset :arity 3}
+   "MSET"    {:mutates true :run kwik-mset :arity -2}
    "MGET"    {:mutates false :run kwik-mget :arity 2}
    "MGETALL" {:mutates true :run kwik-mgetall :arity 1}
    "MDEL"    {:mutates false :run kwik-mdel :arity 2}
