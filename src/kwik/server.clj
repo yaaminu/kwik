@@ -32,6 +32,7 @@
    "LPOP"    {:mutates true :run kwik-lpop :arity 1}
    "MSET"    {:mutates true :run kwik-mset :arity 3}
    "MGET"    {:mutates false :run kwik-mget :arity 2}
+   "MGETALL" {:mutates true :run kwik-mgetall :arity 1}
    "MDEL"    {:mutates false :run kwik-mdel :arity 2}
    "KEYS"    {:mutates false :run kwik-search-keys :arity 1}
    })

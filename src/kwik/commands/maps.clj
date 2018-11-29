@@ -24,6 +24,17 @@
     ["OK" nil])
   )
 
+(defn kwik-mgetall [kwik-database key _]
+  (let [{kwik-db-entry key} @kwik-database]
+    (if (nil? kwik-db-entry)
+      [nil ERR_MAPPING_NOT_FOUND]
+      (let [{type :type value :value} kwik-db-entry]
+        (if (= type "map")
+          [value nil]
+          [nil ERR_TYPE_MISMATCH]))
+      ))
+  )
+
 (defn kwik-mset [kwik-database key argV]
   (if (not= 2 (count argV))
     [nil ERR_WRONG_ARITY]

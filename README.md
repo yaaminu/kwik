@@ -77,8 +77,10 @@ Valid error codes are:
 2. MGET [KEY map-key]
   - Returns the map entry stored at map-key of a map which is stored at KEY
   - example: `curl http://localhost:8000/v1/mget/KEY?args=map-key`
-
-3. MDEL [KEY map-key]
+3. MGETALL [KEY]
+  - Returns all entries of the map stored at KEY
+  - example `curl http://localhost:8000/v1/mgetall/KEY`
+4. MDEL [KEY map-key]
   - Removes a map entry stored at map-key of a map stored at KEY
   - example: `curl http://localhost:8000/v1/mdel/KEY?args=map-key`
 
