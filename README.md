@@ -1,5 +1,5 @@
 # Kwik 
-  a simple KV store written in [clojure](https://clojure.org). 
+  a simple KV store written in [clojure](https://clojure.org) while I was interveiwing at [trade ghana]("https://tradeghana.co"). 
 
 
 KWIK supports three data structures strings, lists and maps. It speaks http so it's very easy to use. All you need to interact with it is an http client. The client issues a command to the server and it gets a response back in json. 
