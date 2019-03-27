@@ -6,7 +6,7 @@ KWIK supports three data structures strings, lists and maps. It speaks http so i
 
 
 
-##Design considerations
+## Design considerations
 
 - Every kwik response is json compatible. The response could 
   either be a json object or a json primitive.
@@ -27,7 +27,7 @@ function and add it as an entry to the command-table. Kwik server will pick it u
 
 
 
-##Limitations
+## Limitations
 - Since the protocol runs on top http, which is text based, values like `nil` cannot be represented so when a mapping does not exist, an error is returned so clients can handle it gracefully
 
 - kwik is in-memory so a server restart will lead to data loss.
@@ -74,7 +74,7 @@ Valid error codes are:
 
  
 
-##USAGE 
+## USAGE 
 
 **Kwik command grouped by their respective data structures**
 
@@ -136,6 +136,6 @@ Valid error codes are:
 
 
 
-#testing
+# Testing
 
 Run `lein test` in the root directory of the project
